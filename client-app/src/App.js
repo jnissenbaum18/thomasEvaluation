@@ -16,7 +16,7 @@ class App extends Component {
 	queryRestaurants = (searchText) => {
 		console.log('Query restaurants ', searchText);
 		if (searchText) {
-			fetch(`/restaurants?searchText=${searchText}&pageNumber=${2}&pageSize=${12}`)
+			fetch(`/restaurants?searchText="${searchText}"&pageNumber=${2}&pageSize=${12}`)
 				.then(res => res.json())
 				.then((data) => {
 					this.setState({

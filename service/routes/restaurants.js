@@ -36,6 +36,7 @@ router.get('/', async (req, res, next) => {
     } else {
       
     }
+    console.log('search result:', searchResult.length)
     res.status(200).json(JSON.stringify(searchResult));
   } catch (e) {
     console.error(e);
