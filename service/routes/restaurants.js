@@ -1,44 +1,42 @@
 var express = require('express');
 var router = express.Router();
 
-var db = require('../db/index.js');
 var restaurant = require('../db/models/restaurant');
 
-/* GET users listing. */
+/* GET restaurant listing. */
 router.get('/', async (req, res, next) => {
-  var body = {
-    searchText: "10022",
-    pageNumber: 1,
-    pageSize: 10
+  let searchParams = {}
+
+  if (req.query.pageNumber) {
+    searchParams.pageNumber = Number(req.query.pageNumber);
   }
 
-  if (req.query.page) {
-    body.pageNumber = req.query.page
+  if (req.query.pageSize) {
+    searchParams.pageSize = Number(req.query.pageSize);
   }
 
   if (req.query.searchText) {
     const queryString = '\"' + req.query.searchText.split(' ').join('\" \"') + '\"'; 
-    body.searchText = queryString;
+    searchParams.searchText = queryString;
   }
 
-  console.log('search ', body.searchText)
+  console.log(`Query DB, searchText: ${searchParams.searchText}, pageNumber: ${searchParams.pageNumber}, pageSize: ${searchParams.pageSize}`)
 
   try {
-
     let searchResult;
-
-    if (body.searchText) {
+    
+    if (searchParams.searchText) {
       searchResult = await restaurant.find({ 
         $text: { 
-          $search: body.searchText
+          $search: searchParams.searchText
         } 
       })
-      .limit(body.pageSize)
-      .skip((body.pageNumber - 1) * body.pageSize);
+      .limit(searchParams.pageSize)
+      .skip((searchParams.pageNumber - 1) * searchParams.pageSize);
     } else {
       
     }
-    res.status(200).json(searchResult);
+    res.status(200).json(JSON.stringify(searchResult));
   } catch (e) {
     console.error(e);
     return res.status(500).send(e);

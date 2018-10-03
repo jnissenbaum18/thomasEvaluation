@@ -21,6 +21,6 @@ async function initDBConnection () {
     });
 }; 
 
-initDBConnection().catch(error => console.error(error))
+initDBConnection().catch(error => console.error(error));
 
 module.exports = db;

@@ -8,4 +8,8 @@ router.get('/', function(req, res, next) {
   res.status(200).json({dbStatus: db.readyState});
 });
 
+router.get('/favicon.ico', function(req, res, next) {
+  res.status(204)
+});
+
 module.exports = router;

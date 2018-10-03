@@ -2,17 +2,27 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import Searchbar from './components/searchbar';
+
 class App extends Component {
+  queryRestaurants = (searchText) => {
+    console.log('Query restaurants ', searchText);
+    if (searchText) {
+      fetch(`/restaurants?searchText=${searchText}&pageNumber=${2}&pageSize=${12}`)
+      .then(res => res.json())
+      .then((data)=>{
+        console.log('data: ', data)
+      })
+      .catch(error => console.error(error));
+    }
+  }
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">NYC Restaurants</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Searchbar queryRestaurants={this.queryRestaurants}></Searchbar>
       </div>
     );
   }
