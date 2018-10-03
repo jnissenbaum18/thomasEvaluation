@@ -1,0 +1,11 @@
+.Quick-card-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0px 120px;
+    justify-content: space-between;
+}
+
+.Quick-card-container {
+    margin: 20px 0;
+}

@@ -1,0 +1,29 @@
+.Quick-card {
+    width: 350px;
+    height: 320px;
+    overflow: hidden;
+}
+
+.Quick-card-img {
+    height: 200px;
+}
+
+.Quick-card-title {
+    font-size: smaller;
+}
+
+.Quick-card-cuisine {
+    font-size: smaller;
+}
+
+.Quick-card-text {
+    font-size: smaller;
+}
+
+p {
+    width: 300px;
+    height: 20px;
+    margin-bottom: 0;
+    text-align: left;
+    overflow: hidden;
+}
