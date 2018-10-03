@@ -1,3 +1,15 @@
+.Results-container {
+
+}
+
+.Results-header {
+    background-image: url("http://restaurants-static.tpco.info.s3-website-us-east-1.amazonaws.com/design-assets/restaurants/image_2.jpg");
+    background-size: cover;
+    background-position: bottom left;
+    color: white;
+    padding: 100px 400px;
+}
+
 .Quick-card-row {
     display: flex;
     flex-direction: row;

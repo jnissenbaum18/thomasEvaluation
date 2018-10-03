@@ -1,0 +1,27 @@
+.Letter-rating-container {
+    background-color: white;
+    height: 200px;
+    width: 200px;
+}
+
+.NY-seal {
+    height: 150px;
+    position: relative;
+    top: 25px;
+    z-index: 1;
+    opacity: .5;
+}
+
+.Letter {
+    height: 100px;
+    position: relative;
+    top: -100px;
+    z-index: 2;
+}
+
+.Letter-GP {
+    height: 50px;
+    position: relative;
+    top: -75px;
+    z-index: 2;
+}

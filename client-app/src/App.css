@@ -8,10 +8,11 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 100px;
-  padding: 20px;
-  color: white;
+  background-color: #00314e;
+  padding: 5px 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .App-title {
@@ -20,6 +21,13 @@
 
 .App-intro {
   font-size: large;
+}
+
+.App-footer {
+  background-color: #00314e;
+  padding: 5px 100px;
+  display: flex;
+	flex-direction: row;
 }
 
 @keyframes App-logo-spin {

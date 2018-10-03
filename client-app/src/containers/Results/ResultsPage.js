@@ -10,15 +10,21 @@ class ResultsPage extends Component {
     render(){
         const {restaurants} = this.props;
         return (
-            <div className="Quick-card-row">
-                {restaurants.map((rst, i) => {
-                    console.log(rst)
-                    return (
-                        <div key={i} className="Quick-card-container">
-                            <QuickCard rst={rst}></QuickCard>
-                        </div>
-                    )
-                })}
+            <div className="Results-container">
+                <div className="Results-header">
+                    <p>Search:</p>
+                    <p>{this.props.searchText}</p>
+                </div>
+                <div className="Quick-card-row">
+                    {restaurants.map((rst, i) => {
+                        console.log(rst)
+                        return (
+                            <div key={i} className="Quick-card-container">
+                                <QuickCard rst={rst}></QuickCard>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         )
     }

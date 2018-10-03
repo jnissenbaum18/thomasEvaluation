@@ -15,7 +15,7 @@ class SearchBar extends Component {
     render(){
         return (
             <div>
-                <div className="input-group mb-3">
+                <div className="input-group">
                     <div className="input-group-prepend">
                     <select className="form-control">
                         <option>All</option>
