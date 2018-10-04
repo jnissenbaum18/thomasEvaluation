@@ -5,44 +5,74 @@ var restaurant = require('../db/models/restaurant');
 
 /* GET restaurant listing. */
 router.get('/', async (req, res, next) => {
-  let searchParams = {}
 
-  if (req.query.pageNumber) {
-    searchParams.pageNumber = Number(req.query.pageNumber);
-  }
+	const queryParams = constructQuery(req.query);
 
-  if (req.query.pageSize) {
-    searchParams.pageSize = Number(req.query.pageSize);
-  }
-
-  if (req.query.searchText) {
-    const queryString = '\"' + req.query.searchText.split(' ').join('\" \"') + '\"'; 
-    searchParams.searchText = queryString;
-  }
-
-  console.log(`Query DB, searchText: ${searchParams.searchText}, pageNumber: ${searchParams.pageNumber}, pageSize: ${searchParams.pageSize}`)
-
-  try {
-    let searchResult;
-    
-    if (searchParams.searchText) {
-      searchResult = await restaurant.find({ 
-        $text: { 
-          $search: searchParams.searchText
-        } 
-      })
-      .limit(searchParams.pageSize)
-      .skip((searchParams.pageNumber - 1) * searchParams.pageSize);
-    } else {
-      
-    }
-    console.log('search result:', searchResult.length)
-    res.status(200).json(JSON.stringify(searchResult));
-  } catch (e) {
-    console.error(e);
-    return res.status(500).send(e);
-  }
+	try {
+		
+		if (queryParams.searchText) {
+			const queryResult = Promise.all([queryDatabase(queryParams), getQueryCount(queryParams)])
+			.then((result)=>{
+				const sendResult = {
+					restaurants: result[0],
+					count: result[1]
+				}
+				console.log(`Search results count: ${sendResult.count}`)
+				res.status(200).json(JSON.stringify(sendResult));
+			})
+		} else {
+			
+		}
+		
+	} catch (e) {
+		console.error(e);
+		return res.status(500).send(e);
+	}
 
 });
+
+function constructQuery(params){
+	console.log('params', params)
+	let searchParams = {}
+
+	if (params.pageNumber) {
+		searchParams.pageNumber = Number(params.pageNumber);
+	} else {
+		searchParams.pageNumber = 1;
+	}
+
+	if (params.pageSize) {
+		searchParams.pageSize = Number(params.pageSize);
+	} else {
+		searchParams.pageSize = 12;
+	}
+
+	if (params.searchText) {
+		const queryString = '\"' + params.searchText.split(' ').join('\" \"') + '\"'; 
+		searchParams.searchText = queryString;
+	}
+
+	console.log(`Query DB, searchText: ${searchParams.searchText}, pageNumber: ${searchParams.pageNumber}, pageSize: ${searchParams.pageSize}`)
+
+	return searchParams
+}
+
+async function getQueryCount(queryParams){
+	return await restaurant.find({ 
+		$text: { 
+			$search: queryParams.searchText
+		} 
+	}).countDocuments();
+}
+
+async function queryDatabase(queryParams){
+	return await restaurant.find({ 
+		$text: { 
+			$search: queryParams.searchText
+		} 
+	})
+	.limit(queryParams.pageSize)
+	.skip((queryParams.pageNumber - 1) * queryParams.pageSize);
+}
 
 module.exports = router;

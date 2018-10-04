@@ -1,11 +1,12 @@
 .Quick-card {
     width: 350px;
-    height: 320px;
+    height: 380px;
     overflow: hidden;
+    position: relative;
 }
 
 .Quick-card-img {
-    height: 200px;
+    height: 250px;
 }
 
 .Quick-card-title {
@@ -18,6 +19,13 @@
 
 .Quick-card-text {
     font-size: smaller;
+}
+
+.Letter-rating-card-container {
+    position: absolute;
+    right: -10px;
+    top: 80px;
+    transform: scale(.7);
 }
 
 p {

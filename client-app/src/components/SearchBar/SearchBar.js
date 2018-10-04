@@ -3,35 +3,35 @@ import React, {Component} from 'react';
 class SearchBar extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            searchText: ""
-        }
     }
     updateSearchText = (e) => {
-        this.setState({
-            searchText: e.target.value
-        });
+        this.props.updateQuery(e.target.value);
+    }
+    updateFilter = (e) => {
+        this.props.updateFilter(e.target.value);
     }
     render(){
         return (
             <div>
                 <div className="input-group">
                     <div className="input-group-prepend">
-                    <select className="form-control">
-                        <option>All</option>
-                        <option>A</option>
-                        <option>B</option>
-                        <option>C</option>
-                        <option>Grade Pending</option>                        
+                    <select className="form-control" 
+                    value={this.props.gradeFilter} 
+                    onChange={e => this.updateFilter(e)}>
+                        <option value="All">All</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="Not Yet Graded">Grade Pending</option>                        
                     </select>
                     </div>
                     <input 
                         type="text" 
-                        value={this.state.searchText} 
+                        value={this.props.searchText} 
                         onChange={e => this.updateSearchText(e)} 
                         onKeyPress={(e) => {
                             if (e.key === 'Enter') {
-                                this.props.queryRestaurants(this.state.searchText);
+                                this.props.queryRestaurants();
                             }
                         }}
                         className="form-control" 
@@ -39,9 +39,9 @@ class SearchBar extends Component {
                     />
                     <div className="input-group-append">
                         <button 
-                            className="btn btn-outline-secondary" 
+                            className="btn btn-success" 
                             type="button" 
-                            onClick={() => {this.props.queryRestaurants(this.state.searchText)}}
+                            onClick={() => {this.props.queryRestaurants()}}
                         >Search</button>
                     </div>
                 </div>

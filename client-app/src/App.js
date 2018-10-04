@@ -10,22 +10,52 @@ class App extends Component {
 		super(props);
 		this.state = {
 			searchText: "",
-			restaurants: null
+			restaurants: null,
+			count: 0,
+			pageNumber: 1,
+			pageSize: 12,
+			gradeFilter: "All",
+			moneyFilter: "All"
 		}
 	}
-	queryRestaurants = (searchText) => {
-		console.log('Query restaurants ', searchText);
-		if (searchText) {
-			fetch(`/restaurants?searchText="${searchText}"&pageNumber=${2}&pageSize=${12}`)
+	queryRestaurants = () => {
+		console.log('Query restaurants ', this.state);
+		if (this.state.searchText) {
+			fetch(`/restaurants?searchText="${this.state.searchText}"&pageNumber=${this.state.pageNumber}&pageSize=${this.state.pageSize}`)
 				.then(res => res.json())
 				.then((data) => {
+					const parsedData = JSON.parse(data)
 					this.setState({
-						searchText: searchText,
-						restaurants: JSON.parse(data)
+						restaurants: parsedData.restaurants,
+						count: parsedData.count
 					})
 				})
 				.catch(error => console.error(error));
 		}
+	}
+	updateQuery = (searchText, pageNumber, pageSize) => {
+		let updateState = {};
+		if (searchText) {
+			updateState.searchText = searchText;
+		}
+		if (pageNumber) {
+			updateState.pageNumber = pageNumber;
+		}
+		if (pageSize) {
+			updateState.pageSize = pageSize;
+		}
+		this.setState(updateState);
+	}
+	updateFilter = (gradeFilter, moneyFilter) => {
+		let updateState = {};
+		if (gradeFilter) {
+			updateState.gradeFilter = gradeFilter;
+		}
+		if (moneyFilter) {
+			updateState.moneyFilter = moneyFilter;
+		}
+		console.log(updateState)
+		this.setState(updateState);
 	}
 	render() {
 		return (
@@ -37,10 +67,33 @@ class App extends Component {
 					<div style={{flex: 2}}>
 					</div>
 					<div style={{flex: 3}}>
-						{this.state.restaurants ? <SearchBar queryRestaurants={this.queryRestaurants}></SearchBar> : <div></div>}
+						{this.state.restaurants ? 
+						<SearchBar 
+							searchText={this.state.searchText}
+							updateQuery={this.updateQuery} 
+							updateFilter={this.updateFilter} 
+							queryRestaurants={this.queryRestaurants}
+							gradeFilter={this.state.gradeFilter}>
+						</SearchBar> : <div></div>}
 					</div>
 				</header>
-				{this.state.restaurants ? <ResultsPage searchText={this.state.searchText} restaurants={this.state.restaurants}></ResultsPage> : <HomePage queryRestaurants={this.queryRestaurants}></HomePage>}
+				{this.state.restaurants ? <ResultsPage 
+					searchText={this.state.searchText} 
+					restaurants={this.state.restaurants} 
+					count={this.state.count}
+					pageNumber={this.state.pageNumber}
+					gradeFilter={this.state.gradeFilter}
+					moneyFilter={this.state.moneyFilter}
+					updateQuery={this.updateQuery} 
+					updateFilter={this.updateFilter}
+					queryRestaurants={this.queryRestaurants}>
+				</ResultsPage> : <HomePage 
+					searchText={this.state.searchText}
+					updateQuery={this.updateQuery} 
+					updateFilter={this.updateFilter} 
+					queryRestaurants={this.queryRestaurants}
+					gradeFilter={this.state.gradeFilter}>
+				</HomePage>}
 				<footer className="App-footer">
 					<div style={{flex: 1}}>
 						<img className="" src="http://restaurants-static.tpco.info.s3-website-us-east-1.amazonaws.com/design-assets/logos/thomas_logo.png"/>

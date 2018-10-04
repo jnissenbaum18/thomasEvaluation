@@ -13,7 +13,12 @@ class Homepage extends Component {
             <div className="Home-container">
                 <div className="Home-header">
                     <h2>NYC Restaurants</h2>
-                    <SearchBar queryRestaurants={this.props.queryRestaurants}></SearchBar>
+                    <SearchBar 
+                    searchText={this.props.searchText}
+                    updateQuery={this.props.updateQuery} 
+                    updateFilter={this.props.updateFilter} 
+                    queryRestaurants={this.props.queryRestaurants}
+                    gradeFilter={this.props.gradeFilter}></SearchBar>
                 </div>
                 <div className="Home-body">
                     <LetterRating rating="a"></LetterRating>

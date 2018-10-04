@@ -7,7 +7,35 @@
     background-size: cover;
     background-position: bottom left;
     color: white;
-    padding: 100px 400px;
+    padding: 80px 0px;
+    padding-left: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.Results-header-search {
+    background-color: white;
+    color: #9b9b9b;
+    display: block;
+    padding: 5px 20px;
+}
+
+.Results-header-search-text {
+    margin-top: 10px;
+    background-color: #32b3e9;
+    color: white;
+    display: block;
+    float: left;
+    padding: 5px 20px;
+}
+
+.Options-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 120px 0px;
 }
 
 .Quick-card-row {
@@ -21,3 +49,14 @@
 .Quick-card-container {
     margin: 20px 0;
 }
+
+.Paging-buttons {
+    padding: 0px 0px 20px;
+    padding-left: 120px;
+}
+
+h1 {
+    margin-bottom: 0px;
+    font-weight: 800;
+}
+
