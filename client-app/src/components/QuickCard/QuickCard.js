@@ -20,7 +20,7 @@ class QuickCard extends Component {
                 <div className="Letter-rating-card-container">
                     <LetterRating rating={this.getGrade(rst.grade)}></LetterRating>
                 </div>
-                <img className="card-img-top Quick-card-img" src={rst.imageUrl}/>
+                <img className="card-img-top Quick-card-img" alt="restaurant" src={rst.imageUrl}/>
                 <div className="card-body">
                     <p className="Quick-card-title" style={{color: "#1c5b7b", fontWeight: 700}}>{rst.name}</p>
                     <p className="Quick-card-cuisine" style={{color: "#a6a8a9"}}>{rst.cuisine} {}</p>

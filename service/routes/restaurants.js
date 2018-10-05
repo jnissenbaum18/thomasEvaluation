@@ -6,12 +6,13 @@ var restaurant = require('../db/models/restaurant');
 /* GET restaurant listing. */
 router.get('/', async (req, res, next) => {
 
-	const queryParams = constructQuery(req.query);
+	const queryParams = parseParams(req.query);
+	const query = constructQuery(queryParams);
 
 	try {
 		
 		if (queryParams.searchText) {
-			const queryResult = Promise.all([queryDatabase(queryParams), getQueryCount(queryParams)])
+			const queryResult = Promise.all([queryDatabase(query, queryParams), getQueryCount(query, queryParams)])
 			.then((result)=>{
 				const sendResult = {
 					restaurants: result[0],
@@ -31,8 +32,7 @@ router.get('/', async (req, res, next) => {
 
 });
 
-function constructQuery(params){
-	console.log('params', params)
+function parseParams(params){
 	let searchParams = {}
 
 	if (params.pageNumber) {
@@ -47,30 +47,44 @@ function constructQuery(params){
 		searchParams.pageSize = 12;
 	}
 
+	if (params.gradeFilter && params.gradeFilter != "All") {
+		searchParams.gradeFilter = params.gradeFilter;
+	} else {
+		searchParams.gradeFilter = false;
+	}
+
 	if (params.searchText) {
 		const queryString = '\"' + params.searchText.split(' ').join('\" \"') + '\"'; 
 		searchParams.searchText = queryString;
 	}
 
-	console.log(`Query DB, searchText: ${searchParams.searchText}, pageNumber: ${searchParams.pageNumber}, pageSize: ${searchParams.pageSize}`)
+	console.log(`Query DB, \nsearchText: ${searchParams.searchText}, \npageNumber: ${searchParams.pageNumber}, \npageSize: ${searchParams.pageSize}, \ngradeFilter: ${searchParams.gradeFilter}`)
 
 	return searchParams
 }
 
-async function getQueryCount(queryParams){
-	return await restaurant.find({ 
+function constructQuery(queryParams){
+	let query = {
 		$text: { 
 			$search: queryParams.searchText
-		} 
-	}).countDocuments();
+		}
+	}
+
+	if (queryParams.gradeFilter) {
+		query.grade = {
+			$eq: queryParams.gradeFilter
+		}
+	}
+
+	return query
 }
 
-async function queryDatabase(queryParams){
-	return await restaurant.find({ 
-		$text: { 
-			$search: queryParams.searchText
-		} 
-	})
+async function getQueryCount(query, queryParams){
+	return await restaurant.find(query).countDocuments();
+}
+
+async function queryDatabase(query, queryParams){
+	return await restaurant.find(query)
 	.limit(queryParams.pageSize)
 	.skip((queryParams.pageNumber - 1) * queryParams.pageSize);
 }

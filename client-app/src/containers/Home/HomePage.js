@@ -5,9 +5,6 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import LetterRating from '../../components/LetterRating/LetterRating';
 
 class Homepage extends Component {
-    constructor(props){
-        super(props);
-    }
     render(){
         return (
             <div className="Home-container">
@@ -18,7 +15,8 @@ class Homepage extends Component {
                     updateQuery={this.props.updateQuery} 
                     updateFilter={this.props.updateFilter} 
                     queryRestaurants={this.props.queryRestaurants}
-                    gradeFilter={this.props.gradeFilter}></SearchBar>
+                    gradeFilter={this.props.gradeFilter}
+                    showFilter={true}></SearchBar>
                 </div>
                 <div className="Home-body">
                     <LetterRating rating="a"></LetterRating>

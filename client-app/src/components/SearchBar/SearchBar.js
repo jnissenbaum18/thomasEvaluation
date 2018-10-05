@@ -1,29 +1,35 @@
 import React, {Component} from 'react';
 
 class SearchBar extends Component {
-    constructor(props){
-        super(props);
-    }
     updateSearchText = (e) => {
         this.props.updateQuery(e.target.value);
     }
     updateFilter = (e) => {
         this.props.updateFilter(e.target.value);
     }
+    showFilter(){
+        if (this.props.showFilter) {
+            return (
+                <select className="form-control" 
+                value={this.props.gradeFilter} 
+                onChange={e => this.updateFilter(e)}>
+                    <option value="All">All</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="Not Yet Graded">Grade Pending</option>                        
+                </select>
+            )
+        } else {
+            return
+        }
+    }
     render(){
         return (
             <div>
                 <div className="input-group">
                     <div className="input-group-prepend">
-                    <select className="form-control" 
-                    value={this.props.gradeFilter} 
-                    onChange={e => this.updateFilter(e)}>
-                        <option value="All">All</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="Not Yet Graded">Grade Pending</option>                        
-                    </select>
+                    {this.showFilter()}
                     </div>
                     <input 
                         type="text" 

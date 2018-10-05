@@ -2,10 +2,15 @@ import React, {Component} from 'react';
 
 import './ResultsPage.css';
 import QuickCard from '../../components/QuickCard/QuickCard';
+import Modal from '../../components/Modal/Modal';
 
 class ResultsPage extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            showModal: false,
+            rst: null
+        }
     }
     renderButtonGroup = (count) => {
         let buttonGroup = [];
@@ -22,11 +27,11 @@ class ResultsPage extends Component {
         await this.props.updateQuery("", page);
         this.props.queryRestaurants();
     }
-    updateFilter = (e) => {
-        this.props.updateFilter(e.target.value);
+    updateFilter = async (e) => {
+        await this.props.updateFilter(e.target.value);
+        this.props.queryRestaurants();
     }
     filterResults = (rst) => {
-        console.log(this.props.gradeFilter, rst.grade)
         if (this.props.gradeFilter === "All") {
             return true
         } else if (this.props.gradeFilter === rst.grade) {
@@ -35,8 +40,19 @@ class ResultsPage extends Component {
             return false
         }
     }
+    showModal = (rst) => {
+        this.setState({
+            showModal: true,
+            rst: rst
+        })
+    }
+    hideModal = () => {
+        this.setState({
+            showModal: false
+        })
+    }
     render(){
-        const {restaurants, searchText, count, pageNumber, gradeFilter, moneyFilter} = this.props;
+        const {restaurants, searchText, count, pageNumber} = this.props;
         return (
             <div className="Results-container">
                 <div className="Results-header">
@@ -47,6 +63,10 @@ class ResultsPage extends Component {
                         <h1 style={{fontStyle: "italic", textTransform: "uppercase"}}>{searchText}</h1>
                     </div>
                 </div>
+                <Modal show={this.state.showModal} handleClose={this.hideModal} rst={this.state.rst}>
+                    <p>Modal</p>
+                    <p>Data</p>
+                </Modal>
                 <div className="Options-row">
                     <select 
                     className="form-control" 
@@ -54,6 +74,7 @@ class ResultsPage extends Component {
                     value={this.props.gradeFilter} 
                     onChange={e => this.updateFilter(e)}>
                         <option value="All">Grade</option>
+                        <option value="All">All</option>
                         <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="C">C</option>
@@ -76,12 +97,14 @@ class ResultsPage extends Component {
                     {restaurants.map((rst, i) => {
                         if (this.filterResults(rst)) {
                             return (
-                                <div key={i} className="Quick-card-container">
+                                <div key={i} className="Quick-card-container" onClick={() => {this.showModal(rst)}}>
                                     <QuickCard rst={rst}></QuickCard>
                                 </div>
                             )
                         } else {
-                            return
+                            return (
+                                <div></div>
+                            )
                         }
                     })}
                 </div>

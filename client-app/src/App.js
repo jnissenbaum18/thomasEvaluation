@@ -21,7 +21,11 @@ class App extends Component {
 	queryRestaurants = () => {
 		console.log('Query restaurants ', this.state);
 		if (this.state.searchText) {
-			fetch(`/restaurants?searchText="${this.state.searchText}"&pageNumber=${this.state.pageNumber}&pageSize=${this.state.pageSize}`)
+			fetch(`/restaurants?
+			searchText="${this.state.searchText}"&
+			pageNumber=${this.state.pageNumber}&
+			pageSize=${this.state.pageSize}&
+			gradeFilter=${this.state.gradeFilter}`)
 				.then(res => res.json())
 				.then((data) => {
 					const parsedData = JSON.parse(data)
@@ -37,6 +41,8 @@ class App extends Component {
 		let updateState = {};
 		if (searchText) {
 			updateState.searchText = searchText;
+		} else {
+			updateState.searchText = "";
 		}
 		if (pageNumber) {
 			updateState.pageNumber = pageNumber;
@@ -62,7 +68,7 @@ class App extends Component {
 			<div className="App">
 				<header className="App-header">
 					<div style={{flex: 1}}>
-						<img onClick={()=>{this.setState({restaurants: null})}} className="" src="http://restaurants-static.tpco.info.s3-website-us-east-1.amazonaws.com/design-assets/logos/thomas_logo.png"/>
+						<img onClick={()=>{this.setState({restaurants: null})}} className="" alt="thomas" src="http://restaurants-static.tpco.info.s3-website-us-east-1.amazonaws.com/design-assets/logos/thomas_logo.png"/>
 					</div>
 					<div style={{flex: 2}}>
 					</div>
@@ -73,7 +79,8 @@ class App extends Component {
 							updateQuery={this.updateQuery} 
 							updateFilter={this.updateFilter} 
 							queryRestaurants={this.queryRestaurants}
-							gradeFilter={this.state.gradeFilter}>
+							gradeFilter={this.state.gradeFilter}
+							showFilter={false}>
 						</SearchBar> : <div></div>}
 					</div>
 				</header>
@@ -96,7 +103,7 @@ class App extends Component {
 				</HomePage>}
 				<footer className="App-footer">
 					<div style={{flex: 1}}>
-						<img className="" src="http://restaurants-static.tpco.info.s3-website-us-east-1.amazonaws.com/design-assets/logos/thomas_logo.png"/>
+						<img className="" alt="thomas" src="http://restaurants-static.tpco.info.s3-website-us-east-1.amazonaws.com/design-assets/logos/thomas_logo.png"/>
 					</div>
 					<div style={{flex: 5}}>
 					</div>
