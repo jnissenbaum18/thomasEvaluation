@@ -42,7 +42,7 @@ class App extends Component {
 		if (searchText) {
 			updateState.searchText = searchText;
 		} else {
-			updateState.searchText = "";
+			//updateState.searchText = "";
 		}
 		if (pageNumber) {
 			updateState.pageNumber = pageNumber;

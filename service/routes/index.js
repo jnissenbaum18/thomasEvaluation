@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
   res.status(200).json({dbStatus: db.readyState});
 });
 
+//Silence the favicon.ico request
 router.get('/favicon.ico', function(req, res, next) {
   res.status(204)
 });

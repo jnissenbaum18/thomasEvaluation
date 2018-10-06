@@ -1,6 +1,11 @@
 var fs = require('fs');
 var path = require("path");
 
+/*
+* Load the mongo database configuration file asynchronously from the folder above the root. getConfig will throw 
+* an error if it does not find the file tpcoro1-credentials.txt above the root, or if the data in the file is not 
+* a valid json object.
+*/
 function getConfig() {
     return new Promise(resolve => {
         fs.readFile(path.join(__basedir, '../../../tpcoro1-credentials.txt'), "utf8", (err, data) => {

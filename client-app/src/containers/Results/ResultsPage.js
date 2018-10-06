@@ -25,7 +25,7 @@ class ResultsPage extends Component {
     renderButtonGroup = (count) => {
         let buttonGroup = [];
         for (let i = 0; i < count/12; i++) {
-            buttonGroup.push(<button key={i} type="button" className="btn btn-secondary" onClick={e => this.updatePage(i+1)}>{i+1}</button>);
+            buttonGroup.push(<button key={i} type="button" className="btn btn-light" onClick={e => this.updatePage(i+1)}>{i+1}</button>);
             //temporary workaround for very large number of pages
             if (i > 6) {
                 break;
@@ -76,7 +76,7 @@ class ResultsPage extends Component {
                 </div>
                 <Modal show={this.state.showModal} handleClose={this.hideModal} rst={this.state.rst}>
                     <div className="Modal-info">
-                        <p className="Rst Rst-title">{this.state.rst.name}</p>
+                        <h1 className="Rst Rst-title" style={{fontSize: "x-large", textAlign: "left"}}>{this.state.rst.name}</h1>
                         <p className="Rst Rst-detail">{this.state.rst.cuisine} {}</p>
                         <p className="Rst Rst-text">{this.state.rst.building} {this.state.rst.street}, {this.state.rst.boro}, NY {this.state.rst.zipcode}</p>
                         <p className="Rst Rst-text">{this.state.rst.phone}</p>
@@ -142,7 +142,7 @@ class ResultsPage extends Component {
                             )
                         } else {
                             return (
-                                <div></div>
+                                <div key={i}></div>
                             )
                         }
                     })}

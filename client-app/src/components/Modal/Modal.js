@@ -19,13 +19,12 @@ class Modal extends Component {
         return (
             <div className={showHideClass}>
                 <section className="Modal-main">
-                    <button className="Modal-close" onClick={handleClose}>close</button>
+                    <button className="btn btn-sm Modal-close" onClick={handleClose}>close</button>
                     <div className="Modal-letter-rating">
                         <LetterRating rating={this.getGrade(rst.grade)}></LetterRating>
                     </div>
                     <img className="card-img-top Modal-img" alt="restaurant" src={rst.imageUrl}/>
                     {children}
-                    
                 </section>
             </div>
         )

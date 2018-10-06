@@ -3,7 +3,18 @@ var router = express.Router();
 
 var restaurant = require('../db/models/restaurant');
 
-/* GET restaurant listing. */
+/* GET route for the restaurant endpoint. The route takes in a search string, filtering and paging parameters, 
+* parses those parameters and then executes a db query. The query result as well as the result count is returned
+* to the front end in a json object.
+*
+* input searchText : String - A string to be parsed and queried into the database
+* input pageNumber : Number - The current page of results to return
+* input pageSize : Number - The number of results to return for the current page. Defaulted to 12.
+* input gradeFilter : String - A string that will be matched directly to the "grade" field to filter results.
+*
+* output restaurants : Array of objects - Array of restaurant db documents returned as json objects.
+* output count : Number - The number of total documents that match the query without paging.
+*/
 router.get('/', async (req, res, next) => {
 
 	const queryParams = parseParams(req.query);
@@ -12,6 +23,8 @@ router.get('/', async (req, res, next) => {
 	try {
 		
 		if (queryParams.searchText) {
+			//Only execute a query if there is text to search for. Wait for both queryDatabase and getQueryCount to resolve
+			//before sending the result.
 			const queryResult = Promise.all([queryDatabase(query, queryParams), getQueryCount(query, queryParams)])
 			.then((result)=>{
 				const sendResult = {
@@ -32,6 +45,7 @@ router.get('/', async (req, res, next) => {
 
 });
 
+//Check for the existance of the required params and if empty, initialize them to default values.
 function parseParams(params){
 	let searchParams = {}
 
@@ -54,6 +68,7 @@ function parseParams(params){
 	}
 
 	if (params.searchText) {
+		//Modify the searchText string to enable multiword queries.
 		const queryString = '\"' + params.searchText.split(' ').join('\" \"') + '\"'; 
 		searchParams.searchText = queryString;
 	}
@@ -63,6 +78,7 @@ function parseParams(params){
 	return searchParams
 }
 
+//Construct the mongo query. Only include gradeFilter if a specific grade is provided.
 function constructQuery(queryParams){
 	let query = {
 		$text: { 
@@ -79,10 +95,12 @@ function constructQuery(queryParams){
 	return query
 }
 
+//Get the total number of documents that match the query without returning the full results.
 async function getQueryCount(query, queryParams){
 	return await restaurant.find(query).countDocuments();
 }
 
+//Query db only for the specific page requested.
 async function queryDatabase(query, queryParams){
 	return await restaurant.find(query)
 	.limit(queryParams.pageSize)
