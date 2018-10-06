@@ -50,13 +50,58 @@
     margin: 20px 0;
 }
 
+.Modal-info {
+    padding: 20px;
+}
+
 .Paging-buttons {
     padding: 0px 0px 20px;
     padding-left: 120px;
 }
 
+.Rst {
+    font-size: smaller;
+}
+
+.Rst-title {
+    color: #1c5b7b;
+    font-weight: 700;
+}
+
+.Rst-detail {
+    color: #a6a8a9;
+}
+
+.Rst-detail-large {
+    color: #a6a8a9;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0px 0px 10px;
+}
+
+.Rst-text {
+    color: #767676;
+}
+
+.Rst-date {
+    color: black;
+    font-weight: 600;
+}
+
+.Rst-inspections-container {
+    height: 180px;
+}
+
 h1 {
     margin-bottom: 0px;
     font-weight: 800;
+}
+
+p {
+    width: 300px;
+    height: 20px;
+    margin-bottom: 0;
+    text-align: left;
+    overflow: hidden;
 }
 

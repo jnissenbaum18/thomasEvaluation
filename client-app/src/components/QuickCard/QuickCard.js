@@ -14,18 +14,15 @@ class QuickCard extends Component {
         return Grades[grade]
     }
     render(){
-        const {rst} = this.props;
+        const {rst, children} = this.props;
         return (
             <div className="card Quick-card">
-                <div className="Letter-rating-card-container">
+                <div className="Quick-card-letter-rating">
                     <LetterRating rating={this.getGrade(rst.grade)}></LetterRating>
                 </div>
                 <img className="card-img-top Quick-card-img" alt="restaurant" src={rst.imageUrl}/>
                 <div className="card-body">
-                    <p className="Quick-card-title" style={{color: "#1c5b7b", fontWeight: 700}}>{rst.name}</p>
-                    <p className="Quick-card-cuisine" style={{color: "#a6a8a9"}}>{rst.cuisine} {}</p>
-                    <p className="Quick-card-text" style={{color: "#767676"}}>{rst.building} {rst.street}, {rst.boro}, NY {rst.zipcode}</p>
-                    <p className="Quick-card-text" style={{color: "#767676"}}>{rst.phone}</p>
+                    {children}
                 </div>
             </div>
         )

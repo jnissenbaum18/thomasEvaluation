@@ -11,13 +11,30 @@
 .Modal-main {
     position: fixed;
     background: white;
-    width: 80%;
+    width: 50%;
     height: auto;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
 }
   
+.Modal-img {
+    height: 200px;
+
+}
+
+.Modal-letter-rating {
+    position: absolute;
+    right: -40px;
+    top: 180px;
+    transform: scale(.6);
+}
+
+.Modal-close {
+    float: right;
+    transform: translateY(-110%)
+}
+
 .display-block {
     display: block;
 }

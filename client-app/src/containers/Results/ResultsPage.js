@@ -3,13 +3,23 @@ import React, {Component} from 'react';
 import './ResultsPage.css';
 import QuickCard from '../../components/QuickCard/QuickCard';
 import Modal from '../../components/Modal/Modal';
+import LetterRating from '../../components/LetterRating/LetterRating';
 
 class ResultsPage extends Component {
     constructor(props){
         super(props);
         this.state = {
             showModal: false,
-            rst: null
+            rst: {
+                name: "",
+                cuisine: "",
+                building: "",
+                street: "",
+                boro: "",
+                zipcode: "",
+                phone: "",
+                inspections: [],
+            }
         }
     }
     renderButtonGroup = (count) => {
@@ -40,11 +50,12 @@ class ResultsPage extends Component {
             return false
         }
     }
-    showModal = (rst) => {
-        this.setState({
+    showModal = async (rst) => {
+        await this.setState({
             showModal: true,
             rst: rst
         })
+        console.log("show modal, rst: ", this.state.rst)
     }
     hideModal = () => {
         this.setState({
@@ -64,8 +75,31 @@ class ResultsPage extends Component {
                     </div>
                 </div>
                 <Modal show={this.state.showModal} handleClose={this.hideModal} rst={this.state.rst}>
-                    <p>Modal</p>
-                    <p>Data</p>
+                    <div className="Modal-info">
+                        <p className="Rst Rst-title">{this.state.rst.name}</p>
+                        <p className="Rst Rst-detail">{this.state.rst.cuisine} {}</p>
+                        <p className="Rst Rst-text">{this.state.rst.building} {this.state.rst.street}, {this.state.rst.boro}, NY {this.state.rst.zipcode}</p>
+                        <p className="Rst Rst-text">{this.state.rst.phone}</p>
+                        <hr></hr>
+                        <p className="Rst Rst-detail-large">Inspections</p>
+                        <div className="pre-scrollable Rst-inspections-container">
+                            {this.state.rst.inspections.map((ins, i)=>{
+                                return (
+                                    <div key={i}>
+                                        <p className="Rst Rst-date">{ins.date}</p>
+                                        <p className="Rst Rst-text">{ins.action}</p>
+                                        <p className="Rst Rst-text" style={{marginLeft: "30px"}}>Violation code: {ins.violation_code}</p>
+                                        <p className="Rst Rst-text" style={{marginLeft: "30px"}}>{ins.violation_desc}</p>
+                                        <p className="Rst Rst-text">Score: {ins.score}</p>
+                                        <p className="Rst Rst-text">Grade {ins.grade}</p>
+                                        <p className="Rst Rst-text">Grade Date: {ins.grade_date}</p>
+                                        <p className="Rst Rst-text">{ins.inspection_type}</p>
+                                        <br/>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
                 </Modal>
                 <div className="Options-row">
                     <select 
@@ -98,7 +132,12 @@ class ResultsPage extends Component {
                         if (this.filterResults(rst)) {
                             return (
                                 <div key={i} className="Quick-card-container" onClick={() => {this.showModal(rst)}}>
-                                    <QuickCard rst={rst}></QuickCard>
+                                    <QuickCard rst={rst}>
+                                        <p className="Rst Rst-title">{rst.name}</p>
+                                        <p className="Rst Rst-detail">{rst.cuisine} {}</p>
+                                        <p className="Rst Rst-text">{rst.building} {rst.street}, {rst.boro}, NY {rst.zipcode}</p>
+                                        <p className="Rst Rst-text">{rst.phone}</p>
+                                    </QuickCard>
                                 </div>
                             )
                         } else {

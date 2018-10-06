@@ -9,29 +9,9 @@
     height: 250px;
 }
 
-.Quick-card-title {
-    font-size: smaller;
-}
-
-.Quick-card-cuisine {
-    font-size: smaller;
-}
-
-.Quick-card-text {
-    font-size: smaller;
-}
-
-.Letter-rating-card-container {
+.Quick-card-letter-rating {
     position: absolute;
     right: -10px;
     top: 80px;
     transform: scale(.7);
-}
-
-p {
-    width: 300px;
-    height: 20px;
-    margin-bottom: 0;
-    text-align: left;
-    overflow: hidden;
 }
