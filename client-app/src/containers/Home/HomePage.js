@@ -13,7 +13,6 @@ class Homepage extends Component {
                     <SearchBar 
                     searchText={this.props.searchText}
                     updateQuery={this.props.updateQuery} 
-                    updateFilter={this.props.updateFilter} 
                     queryRestaurants={this.props.queryRestaurants}
                     gradeFilter={this.props.gradeFilter}
                     showFilter={true}></SearchBar>

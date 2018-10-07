@@ -21,7 +21,7 @@ class QuickCard extends Component {
                     <LetterRating rating={this.getGrade(rst.grade)}></LetterRating>
                 </div>
                 <img className="card-img-top Quick-card-img" alt="restaurant" src={rst.imageUrl}/>
-                <div className="card-body">
+                <div className="card-body pre-scrollable">
                     {children}
                 </div>
             </div>

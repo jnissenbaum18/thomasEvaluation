@@ -2,10 +2,14 @@ import React, {Component} from 'react';
 
 class SearchBar extends Component {
     updateSearchText = (e) => {
-        this.props.updateQuery(e.target.value);
+        this.props.updateQuery({
+            searchText: e.target.value
+        });
     }
     updateFilter = (e) => {
-        this.props.updateFilter(e.target.value);
+        this.props.updateQuery({
+            gradeFilter: e.target.value
+        });
     }
     showFilter(){
         if (this.props.showFilter) {

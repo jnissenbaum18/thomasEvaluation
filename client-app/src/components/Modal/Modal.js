@@ -17,9 +17,8 @@ class Modal extends Component {
         const {show, handleClose, children, rst} = this.props;
         const showHideClass = show ? "Modal-container display-block" : "Modal-container display-none"
         return (
-            <div className={showHideClass}>
-                <section className="Modal-main">
-                    <button className="btn btn-sm Modal-close" onClick={handleClose}>close</button>
+            <div className={showHideClass} id="Modal-container" onClick={(e) => {handleClose(e.target)}}>
+                <section className="Modal-main" onClick={()=>{}}>
                     <div className="Modal-letter-rating">
                         <LetterRating rating={this.getGrade(rst.grade)}></LetterRating>
                     </div>
