@@ -66,6 +66,7 @@ class ResultsPage extends Component {
         const {restaurants, searchText, count, pageNumber} = this.props;
         return (
             <div className="Results-container">
+                {/* Header */}
                 <div className="Results-header">
                     <div className="Results-header-search">
                         <h1>Search:</h1>
@@ -74,6 +75,7 @@ class ResultsPage extends Component {
                         <h1 style={{fontStyle: "italic", textTransform: "uppercase"}}>{searchText}</h1>
                     </div>
                 </div>
+                {/* Modal */}
                 <Modal show={this.state.showModal} handleClose={this.hideModal} rst={this.state.rst}>
                     <div className="Modal-info">
                         <h1 className="Rst Rst-title" style={{fontSize: "x-large", textAlign: "left", width: "80%"}}>{this.state.rst.name}</h1>
@@ -82,6 +84,7 @@ class ResultsPage extends Component {
                         <div className="Rst Rst-text">{this.state.rst.phone}</div>
                         <hr></hr>
                         <div className="Rst Rst-detail-large">Inspections</div>
+                        {/* Inspections List */}
                         <div className="pre-scrollable Rst-inspections-container">
                             {this.state.rst.inspections.map((ins, i)=>{
                                 const insDate = new Date(ins.date);
@@ -108,6 +111,7 @@ class ResultsPage extends Component {
                         </div>
                     </div>
                 </Modal>
+                {/* Filter Options */}
                 <div className="Options-row">
                     <select 
                     className="form-control" 
@@ -134,6 +138,7 @@ class ResultsPage extends Component {
                         <p style={{width: "200px"}}>Viewing: {pageNumber === 1 ? 1 : ((pageNumber - 1)*12 + 1)} - {(pageNumber)*12} of {count}</p>
                     </div>
                 </div>
+                {/* Restaurant Quick Cards */}
                 <div className="Quick-card-row">
                     {restaurants.map((rst, i) => {
                         return (
@@ -148,6 +153,7 @@ class ResultsPage extends Component {
                         )
                     })}
                 </div>
+                {/* Paging */}
                 <div className="Paging-buttons">
                     <div className="btn-toolbar" role="toolbar">
                         <div className="btn-group" role="group">
