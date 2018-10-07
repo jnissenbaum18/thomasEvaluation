@@ -21,7 +21,7 @@ Complete.
 
 #### Search Client App
 
-* Create a single page app which enables users to enter search terms and view paged lists of restaurant results based on the query result
+* Create a single page app which enables users to enter search terms and view paged lists of restaurant results based on the query result.
 Complete.
 
 * Use Bootstrap 4.x to create a pixel-perfect, responsive layout which matches the given design.
@@ -37,10 +37,10 @@ Complete.
 
 #### Search Service
 
-* Implement simple paging logic in the search endpoint (skip/take)
+* Implement simple paging logic in the search endpoint (skip/take).
 Complete.
 
-* Make a more advanced filter that enables multi-word queries to be submitted against the ‘searchText’ field as multiple ‘and’ filter clauses (ie the query ‘queens mexican’ would be parsed and interpreted against the db as ‘searchText contains ‘queens’ and searhText contains ‘mexican’)
+* Make a more advanced filter that enables multi-word queries to be submitted against the ‘searchText’ field as multiple ‘and’ filter clauses (ie the query ‘queens mexican’ would be parsed and interpreted against the db as ‘searchText contains ‘queens’ and searhText contains ‘mexican’).
 Complete.
 
 * Submit written (not coded) suggestions for improving the performance of the search.
