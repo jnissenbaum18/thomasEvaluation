@@ -35,22 +35,14 @@ class AppComponent extends Component {
 			case ("Home"): {
 				return (
 					<HomePage 
-						searchText={this.props.searchText}
 						updateQuery={this.updateQuery} 
-						queryRestaurants={this.queryRestaurants}
-						gradeFilter={this.props.gradeFilter}>
+						queryRestaurants={this.queryRestaurants}>
 					</HomePage>
 				)
 			}
 			case ("Results"): {
 				return (
 					<ResultsPage 
-						searchText={this.props.searchText} 
-						restaurants={this.props.restaurants} 
-						count={this.props.count}
-						pageNumber={this.props.pageNumber}
-						gradeFilter={this.props.gradeFilter}
-						moneyFilter={this.props.moneyFilter}
 						updateQuery={this.updateQuery} 
 						queryRestaurants={this.queryRestaurants}>
 					</ResultsPage>
@@ -59,10 +51,8 @@ class AppComponent extends Component {
 			default:
 				return (
 					<HomePage 
-						searchText={this.props.searchText}
 						updateQuery={this.updateQuery} 
-						queryRestaurants={this.queryRestaurants}
-						gradeFilter={this.props.gradeFilter}>
+						queryRestaurants={this.queryRestaurants}>
 					</HomePage>
 				)
 		}
@@ -102,8 +92,6 @@ class AppComponent extends Component {
 
 const AppState = (state) => {
 	return {
-		restaurants: state.restaurant.list,
-		count: state.restaurant.count,
 		searchText: state.restaurant.searchText,
 		gradeFilter: state.restaurant.gradeFilter,
 		pageNumber: state.restaurant.pageNumber,

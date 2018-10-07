@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import './ResultsPage.css';
 import QuickCard from '../../components/QuickCard/QuickCard';
@@ -159,4 +160,21 @@ class ResultsPage extends Component {
     }
 }
 
-export default ResultsPage
+const ResultsState = (state) => {
+    return {
+        restaurants: state.restaurant.list,
+		count: state.restaurant.count,
+		searchText: state.restaurant.searchText,
+        gradeFilter: state.restaurant.gradeFilter,
+        moneyFilter: state.restaurant.moneyFilter,
+		pageNumber: state.restaurant.pageNumber,
+		pageSize: state.restaurant.pageSize,
+		view: state.appState.view
+    }
+}
+
+const Results = connect(
+    ResultsState
+)(ResultsPage)
+
+export default Results

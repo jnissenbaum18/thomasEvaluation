@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import './HomePage.css';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import LetterRating from '../../components/LetterRating/LetterRating';
 
-class Homepage extends Component {
+import {
+	fetchRestaurants, 
+	updateQueryParams
+} from '../../redux/actions/actions';
+
+class HomePage extends Component {
     render(){
         return (
             <div className="Home-container">
@@ -28,4 +34,15 @@ class Homepage extends Component {
     }
 }
 
-export default Homepage
+const HomeState = (state) => {
+    return {
+        searchText: state.restaurant.searchText,
+        gradeFilter: state.restaurant.gradeFilter
+    }
+}
+
+const Home = connect(
+    HomeState
+)(HomePage)
+
+export default Home

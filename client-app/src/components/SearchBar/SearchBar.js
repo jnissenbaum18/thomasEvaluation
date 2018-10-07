@@ -15,6 +15,13 @@ class SearchBar extends Component {
             searchText: e.target.value
         });
     }
+    newRestaurantQuery = async () => {
+        //In the case of a use executing a new query through a search, set the search results to 0 first
+        await this.props.updateQuery({
+            pageNumber: 1
+        });
+        this.props.queryRestaurants()
+    }
     updateFilter = (e) => {
         //Update the filter parameter for the restaurants query
         this.props.updateQuery({
@@ -52,7 +59,7 @@ class SearchBar extends Component {
                         onChange={e => this.updateSearchText(e)} 
                         onKeyPress={(e) => {
                             if (e.key === 'Enter') {
-                                this.props.queryRestaurants();
+                                this.newRestaurantQuery();
                             }
                         }}
                         className="Text-input" 
@@ -62,7 +69,7 @@ class SearchBar extends Component {
                         <button 
                             className="btn btn-success Button-input" 
                             type="button" 
-                            onClick={() => {this.props.queryRestaurants()}}
+                            onClick={() => {this.newRestaurantQuery()}}
                         >Search</button>
                     </div>
                 </div>
