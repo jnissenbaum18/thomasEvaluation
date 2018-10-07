@@ -4,16 +4,16 @@ var router = express.Router();
 var restaurant = require('../db/models/restaurant');
 
 /* GET route for the restaurant endpoint. The route takes in a search string, filtering and paging parameters, 
-* parses those parameters and then executes a db query. The query result as well as the result count is returned
-* to the front end in a json object.
-*
-* input searchText : String - A string to be parsed and queried into the database
-* input pageNumber : Number - The current page of results to return
-* input pageSize : Number - The number of results to return for the current page. Defaulted to 12.
-* input gradeFilter : String - A string that will be matched directly to the "grade" field to filter results.
-*
-* output restaurants : Array of objects - Array of restaurant db documents returned as json objects.
-* output count : Number - The number of total documents that match the query without paging.
+parses those parameters and then executes a db query. The query result as well as the result count is returned
+to the front end in a json object.
+
+input searchText : String - A string to be parsed and queried into the database
+input pageNumber : Number - The current page of results to return
+input pageSize : Number - The number of results to return for the current page. Defaulted to 12.
+input gradeFilter : String - A string that will be matched directly to the "grade" field to filter results.
+
+output restaurants : Array of objects - Array of restaurant db documents returned as json objects.
+output count : Number - The number of total documents that match the query without paging.
 */
 router.get('/', async (req, res, next) => {
 
@@ -22,9 +22,12 @@ router.get('/', async (req, res, next) => {
 
 	try {
 		
+		//Only execute a query if there is text to search for
 		if (queryParams.searchText) {
-			//Only execute a query if there is text to search for. Wait for both queryDatabase and getQueryCount to resolve
-			//before sending the result.
+			//Create the index to query off of for searchText. (I suspect the db already has this)
+			restaurant.createIndexes({searchText: "text"});
+
+			//Wait for both queryDatabase and getQueryCount to resolve before sending the result
 			const queryResult = Promise.all([queryDatabase(query, queryParams), getQueryCount(query, queryParams)])
 			.then((result)=>{
 				const sendResult = {
