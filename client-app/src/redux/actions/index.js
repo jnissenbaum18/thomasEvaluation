@@ -1,13 +1,11 @@
 import * as actions from './actions';
 
-//Alert the app that restaurants are being fetched
 function requestRestaurants () {
     return { 
         type: actions.REQUEST_RESTAURANTS
     }
 };
 
-//Update app with new data once restaurants are returned
 function receiveRestaurants (restaurants, count) {
     return {
         type: actions.RECEIVE_RESTAURANTS,
@@ -39,11 +37,14 @@ function setQueryParams (queryParams) {
     }
 }
 
+//Check for parameter existance
 export function updateQueryParams (queryParams) {
     let updateQuery = {};
     if (queryParams[0].searchText) {
         updateQuery.searchText = queryParams[0].searchText;
-    } 
+    } else if (Object.keys(queryParams[0]).indexOf("searchText") != -1) {
+        updateQuery.searchText = ""
+    }
     if (queryParams[0].pageNumber) {
         updateQuery.pageNumber = queryParams[0].pageNumber;
     }

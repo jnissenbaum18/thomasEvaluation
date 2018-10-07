@@ -9,7 +9,7 @@ class Homepage extends Component {
         return (
             <div className="Home-container">
                 <div className="Home-header">
-                    <h2>NYC Restaurants</h2>
+                    <h2 className="Home-header-h2">NYC Restaurants</h2>
                     <SearchBar 
                     searchText={this.props.searchText}
                     updateQuery={this.props.updateQuery} 

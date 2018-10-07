@@ -40,7 +40,8 @@ class ResultsPage extends Component {
     }
     updateFilter = async (e) => {
         await this.props.updateQuery({
-            gradeFilter: e.target.value
+            gradeFilter: e.target.value,
+            pageNumber: 1
         });
         this.props.queryRestaurants();
     }

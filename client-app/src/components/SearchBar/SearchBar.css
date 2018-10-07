@@ -1,0 +1,24 @@
+.Input-container {
+    height: 50px;
+    width: 675px;
+}
+
+.Drop-down-input {
+    height: 100%;
+    width: 100px;
+}
+
+.Text-input {
+    width: 450px;
+}
+
+.Button-container {
+    margin-left: 10px;
+}
+
+.Button-input {
+    height: 100%;
+    width: 110px;
+    background-color: #84bd51;
+    border-color: #84bd51;
+}

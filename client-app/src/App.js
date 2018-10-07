@@ -69,7 +69,7 @@ class AppComponent extends Component {
 			<div className="App">
 				<header className="App-header">
 					<div style={{flex: 1}}>
-						<img onClick={()=>{this.props.setHomeView()}} className="" alt="thomas" src="http://restaurants-static.tpco.info.s3-website-us-east-1.amazonaws.com/design-assets/logos/thomas_logo.png"/>
+						<img onClick={()=>{this.props.setHomeView()}} className="" alt="thomas" style={{height: "43px"}} src="http://restaurants-static.tpco.info.s3-website-us-east-1.amazonaws.com/design-assets/logos/thomas_logo.png"/>
 					</div>
 					<div style={{flex: 2}}>
 					</div>
@@ -87,7 +87,7 @@ class AppComponent extends Component {
 				{this.setComponentBody()}
 				<footer className="App-footer">
 					<div style={{flex: 1}}>
-						<img className="" alt="thomas" src="http://restaurants-static.tpco.info.s3-website-us-east-1.amazonaws.com/design-assets/logos/thomas_logo.png"/>
+						<img className="" alt="thomas" style={{height: "43px"}} src="http://restaurants-static.tpco.info.s3-website-us-east-1.amazonaws.com/design-assets/logos/thomas_logo.png"/>
 					</div>
 					<div style={{flex: 5}}>
 					</div>

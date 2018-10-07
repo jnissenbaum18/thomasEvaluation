@@ -5,9 +5,9 @@
 }
 
 .Home-header {
-    background-color: #003d5e;
+    background-image: linear-gradient(to right, #00314e , #004163);
     color: white;
-    padding: 100px 400px;
+    padding: 85px 380px 75px;
 }
 
 .Home-body {
@@ -16,5 +16,12 @@
     justify-content: space-around;
     background-image: url("http://restaurants-static.tpco.info.s3-website-us-east-1.amazonaws.com/design-assets/restaurants/image_7.jpg");
     background-size: cover;
-    padding: 150px 200px;
+    padding: 171px 170px 168px;
+}
+
+.Home-header-h2 {
+    font-size: 45px;
+    font-weight: 300;
+    margin-bottom: 18px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }

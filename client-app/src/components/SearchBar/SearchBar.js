@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
 
+import './SearchBar.css';
+
 class SearchBar extends Component {
     updateSearchText = (e) => {
+        if (!e.target.value) {
+            this.props.updateQuery({
+                searchText: ""
+            });
+        }
         this.props.updateQuery({
             searchText: e.target.value
         });
@@ -14,7 +21,7 @@ class SearchBar extends Component {
     showFilter(){
         if (this.props.showFilter) {
             return (
-                <select className="form-control" 
+                <select className="Drop-down-input" 
                 value={this.props.gradeFilter} 
                 onChange={e => this.updateFilter(e)}>
                     <option value="All">All</option>
@@ -31,7 +38,7 @@ class SearchBar extends Component {
     render(){
         return (
             <div>
-                <div className="input-group">
+                <div className="input-group Input-container">
                     <div className="input-group-prepend">
                     {this.showFilter()}
                     </div>
@@ -44,12 +51,12 @@ class SearchBar extends Component {
                                 this.props.queryRestaurants();
                             }
                         }}
-                        className="form-control" 
+                        className="Text-input" 
                         aria-label="Text input with dropdown button"
                     />
-                    <div className="input-group-append">
+                    <div className="Button-container">
                         <button 
-                            className="btn btn-success" 
+                            className="btn btn-success Button-input" 
                             type="button" 
                             onClick={() => {this.props.queryRestaurants()}}
                         >Search</button>

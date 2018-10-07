@@ -9,7 +9,7 @@
 
 .App-header {
   background-color: #00314e;
-  padding: 5px 100px;
+  padding: 8px 118px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -25,7 +25,7 @@
 
 .App-footer {
   background-color: #00314e;
-  padding: 5px 100px;
+  padding: 8px 118px;
   display: flex;
 	flex-direction: row;
 }
