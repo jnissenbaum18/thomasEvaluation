@@ -14,6 +14,8 @@ import {
 
 class AppComponent extends Component {
 	queryRestaurants = () => {
+		//Send db query for restaurants to the server. Function is triggered when search is entered, 
+		//filter, or page is selected.
 		console.log('Query restaurants ', this.props);
 		if (this.props.searchText) {
 			this.props.getRestaurants({
@@ -28,6 +30,7 @@ class AppComponent extends Component {
 		this.props.setQuery(queryParams)
 	}
 	setComponentBody = () => {
+		//Provides the body view for the page. Switches between home and results page based upon appState
 		switch (this.props.view) {
 			case ("Home"): {
 				return (

@@ -4,6 +4,8 @@ import './SearchBar.css';
 
 class SearchBar extends Component {
     updateSearchText = (e) => {
+        //Update the searchText query parameter. If there is no character left in the input, 
+        //send back searchText: "" to delete last character
         if (!e.target.value) {
             this.props.updateQuery({
                 searchText: ""
@@ -14,11 +16,13 @@ class SearchBar extends Component {
         });
     }
     updateFilter = (e) => {
+        //Update the filter parameter for the restaurants query
         this.props.updateQuery({
             gradeFilter: e.target.value
         });
     }
     showFilter(){
+        //If the searchbar is not on the home page, do not show the filter on it.
         if (this.props.showFilter) {
             return (
                 <select className="Drop-down-input" 

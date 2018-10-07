@@ -22,6 +22,7 @@ class ResultsPage extends Component {
         }
     }
     renderButtonGroup = (count) => {
+        //Creates an array of buttons to be rendered for paging
         let buttonGroup = [];
         for (let i = 0; i < count/12; i++) {
             buttonGroup.push(<button key={i} type="button" className="btn btn-light" onClick={e => this.updatePage(i+1)}>{i+1}</button>);
@@ -33,26 +34,19 @@ class ResultsPage extends Component {
         return buttonGroup
     }
     updatePage = async (page) => {
+        //Update the page number to be sent to the server and then send the query asynchronously 
         await this.props.updateQuery({
             pageNumber: page
         });
         this.props.queryRestaurants();
     }
     updateFilter = async (e) => {
+        //Update the grade filter to be sent to the server and then send the query asynchronously 
         await this.props.updateQuery({
             gradeFilter: e.target.value,
             pageNumber: 1
         });
         this.props.queryRestaurants();
-    }
-    filterResults = (rst) => {
-        if (this.props.gradeFilter === "All") {
-            return true
-        } else if (this.props.gradeFilter === rst.grade) {
-            return true
-        } else {
-            return false
-        }
     }
     showModal = async (rst) => {
         await this.setState({
@@ -141,22 +135,16 @@ class ResultsPage extends Component {
                 </div>
                 <div className="Quick-card-row">
                     {restaurants.map((rst, i) => {
-                        if (this.filterResults(rst)) {
-                            return (
-                                <div key={i} className="Quick-card-container" onClick={() => {this.showModal(rst)}}>
-                                    <QuickCard rst={rst}>
-                                        <div className="Rst Rst-title">{rst.name}</div>
-                                        <div className="Rst Rst-detail">{rst.cuisine} {}</div>
-                                        <div className="Rst Rst-text">{rst.building} {rst.street}, {rst.boro}, NY {rst.zipcode}</div>
-                                        <div className="Rst Rst-text">{rst.phone}</div>
-                                    </QuickCard>
-                                </div>
-                            )
-                        } else {
-                            return (
-                                <div key={i}></div>
-                            )
-                        }
+                        return (
+                            <div key={i} className="Quick-card-container" onClick={() => {this.showModal(rst)}}>
+                                <QuickCard rst={rst}>
+                                    <div className="Rst Rst-title">{rst.name}</div>
+                                    <div className="Rst Rst-detail">{rst.cuisine} {}</div>
+                                    <div className="Rst Rst-text">{rst.building} {rst.street}, {rst.boro}, NY {rst.zipcode}</div>
+                                    <div className="Rst Rst-text">{rst.phone}</div>
+                                </QuickCard>
+                            </div>
+                        )
                     })}
                 </div>
                 <div className="Paging-buttons">

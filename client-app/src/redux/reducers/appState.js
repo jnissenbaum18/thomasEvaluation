@@ -1,5 +1,9 @@
 import {SET_HOME_VIEW, SET_RESULTS_VIEW} from '../actions/actions';
 
+/* Reducer to hold the application state.
+view : String - String to key off of in the <App/> component to render the app body. Possible values: "Home", "Results".
+*/
+
 const appState = (
     state={
         view: "Home"

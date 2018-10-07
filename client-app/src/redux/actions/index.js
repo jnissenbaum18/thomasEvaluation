@@ -14,7 +14,8 @@ function receiveRestaurants (restaurants, count) {
     }
 }
 
-//Call restaurant fetching states and execute get request to server for restaurants
+//Function to execute get request to server to query for restaurants. Dispatch actions to set isFetching 
+//to signal for the state of the request.
 export function fetchRestaurants (queryParams) {
     return dispatch => {
         dispatch(requestRestaurants());
@@ -37,7 +38,7 @@ function setQueryParams (queryParams) {
     }
 }
 
-//Check for parameter existance
+//Check for parameter existance for the queryParams object and send those through to the restaurants reducer if defined
 export function updateQueryParams (queryParams) {
     let updateQuery = {};
     if (queryParams[0].searchText) {

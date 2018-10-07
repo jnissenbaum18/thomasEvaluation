@@ -5,6 +5,7 @@ import LetterRating from "../LetterRating/LetterRating";
 
 class Modal extends Component {
     getGrade(grade) {
+         //Convert the database grade entries to the image url entry
         const Grades = {
             A: "a",
             B: "b",
