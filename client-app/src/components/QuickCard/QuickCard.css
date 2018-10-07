@@ -11,7 +11,16 @@
 
 .Quick-card-letter-rating {
     position: absolute;
-    right: -10px;
-    top: 80px;
-    transform: scale(.7);
+    right: -40px;
+    top: 50px;
+    transform: scale(.5);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.Quick-card-date {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #9ea0a1;
+    background: white;
 }

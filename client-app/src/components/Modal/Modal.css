@@ -26,8 +26,8 @@
 .Modal-letter-rating {
     position: absolute;
     right: -40px;
-    top: 160px;
-    transform: scale(.5);
+    top: 140px;
+    transform: scale(.4);
 }
 
 .Modal-close {
